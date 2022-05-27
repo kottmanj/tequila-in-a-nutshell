@@ -13419,6 +13419,46 @@ otherwise:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Optimizers">Optimizers<a class="anchor-link" href="#Optimizers">&#182;</a></h2><p>As tequila functions are just scalar functions, they can be minimized</p>
+<div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">final_value</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">energy</span>
+<span class="n">optimized_variables</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">variables</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">final_value</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">optimized_variables</span><span class="p">)</span>
+</pre></div>
+<p>useful</p>
+<div class="highlight"><pre><span></span><span class="n">tq</span><span class="o">.</span><span class="n">show_available_optimizers</span><span class="p">()</span>
+</pre></div>
+<p>see <a href="https://github.com/tequilahub/">github</a> tutorials on optimizers for more</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Vectors,-Matrices,-Tensors">Vectors, Matrices, Tensors<a class="anchor-link" href="#Vectors,-Matrices,-Tensors">&#182;</a></h2><p><code>tq.QTensor</code> class: Same as <code>numpy.ndarray</code> with abstract tequila functions</p>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">QTensor</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">evaluated_matrix</span> <span class="o">=</span> <span class="n">n</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">...</span><span class="p">})</span>
+</pre></div>
+<p>see <a href="https://github.com/tequilahub/">github</a> tutorials on QTensor for more</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="More:">More:<a class="anchor-link" href="#More:">&#182;</a></h2><ul>
 <li>tequila on github: <a href="https://github.com/tequilahub/tequila">github.com/tequilahub/tequila</a></li>
 <li>tutorials: <a href="https://github.com/tequilahub/tequila-tutorials">github.com/tequilahub/tequila-tutorials</a></li>
