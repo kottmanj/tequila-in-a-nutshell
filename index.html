@@ -13260,10 +13260,12 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Tequila-in-a-Nutshell">Tequila in a Nutshell<a class="anchor-link" href="#Tequila-in-a-Nutshell">&#182;</a></h1><ul>
+<h1 id="Tequila-in-a-Nutshell">Tequila in a Nutshell<a class="anchor-link" href="#Tequila-in-a-Nutshell">&#182;</a></h1><p><img src="all_in_one_example.png" width=500 /></p>
+<ul>
 <li>Tequila is software development kit for quantum algorithms focused on abstraction</li>
-<li>It operates on combinations of abstract expectation values</li>
-<li>It allows to define abstract functions from those expectation values</li>
+<li>It allows to define abstract functions from combinations of quantum expectation values</li>
+<li>Frontend and "blackboard-style" API are inspired by <a href="https://github.com/m-a-d-n-e-s-s/madness">madness</a></li>
+<li>Backend-agnostic implementation is inspired by <a href="https://github.com/PennyLaneAI/pennylane">pennylane</a></li>
 </ul>
 
 </div>
@@ -13354,6 +13356,7 @@ prepared by circuit $U(\theta)$.</p>
 <div class="highlight"><pre><span></span><span class="n">dF</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">dF</span><span class="p">)</span>
 </pre></div>
+<p>see tequila <a href="https://nbviewer.org/github/tequilahub/tequila-tutorials/blob/main/BasicUsage.ipynb">tutorials</a> and <a href="https://github.com/kottmanj/talks_and_material/tree/main/qai2022">slides</a> for explicit examples</p>
 
 </div>
 </div>
@@ -13419,6 +13422,18 @@ otherwise:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Measurement-Optimization">Measurement Optimization<a class="anchor-link" href="#Measurement-Optimization">&#182;</a></h2><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">)</span> <span class="c1"># full simulation is faster</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">,</span> <span class="n">optimize_measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># faster sampling</span>
+</pre></div>
+<p>See papers by <a href="https://scholar.google.com/citations?user=RvQGQQQAAAAJ&amp;hl=en&amp;oi=ao">Izmaylov</a> group (T.C. Yen, V. Verteletskyi, Z.P. Bansingh)<br>
+and the tequila <a href="https://nbviewer.org/github/tequilahub/tequila-tutorials/blob/main/MeasurementGroups.ipynb">tutorial</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Optimizers">Optimizers<a class="anchor-link" href="#Optimizers">&#182;</a></h2><p>As tequila functions are just scalar functions, they can be minimized</p>
 <div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
 <span class="n">final_value</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">energy</span>
@@ -13451,7 +13466,16 @@ otherwise:
 
 <span class="n">evaluated_matrix</span> <span class="o">=</span> <span class="n">n</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">...</span><span class="p">})</span>
 </pre></div>
-<p>see <a href="https://github.com/tequilahub/">github</a> tutorials on QTensor for more</p>
+<p>see <a href="https://github.com/tequilahub/">github</a> tutorials on QTensor for more<br>
+implemented as a <a href="https://qosf.org">qosf</a> project (Gaurav Saxena)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="QTensor:-Example">QTensor: Example<a class="anchor-link" href="#QTensor:-Example">&#182;</a></h3><p><img src="qtensor_example.png" width=700 /></p>
 
 </div>
 </div>
