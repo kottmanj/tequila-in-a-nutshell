@@ -13266,6 +13266,7 @@ a.anchor-link {
 <li>It allows to define abstract functions from combinations of quantum expectation values</li>
 <li>Frontend and "blackboard-style" API are inspired by <a href="https://github.com/m-a-d-n-e-s-s/madness">madness</a></li>
 <li>Backend-agnostic implementation is inspired by <a href="https://github.com/PennyLaneAI/pennylane">pennylane</a></li>
+<li>Tequila leverages libraries like: OpenFermion, Qulacs, Jax, SciPy and many more</li>
 </ul>
 
 </div>
@@ -13364,6 +13365,15 @@ prepared by circuit $U(\theta)$.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Example-from-the-tile-slide:">Example from the tile slide:<a class="anchor-link" href="#Example-from-the-tile-slide:">&#182;</a></h4><p><img src="example_1.png" width=1000 /></p>
+<p><a href="https://github.com/kottmanj/talks_and_material/blob/main/qai2022/code/example_objective.py">source code</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="More-complex-gate-parameters">More complex gate parameters<a class="anchor-link" href="#More-complex-gate-parameters">&#182;</a></h2><p>standard parametrized $R_y$ gate</p>
 <div class="highlight"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">Ry</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -13377,6 +13387,15 @@ prepared by circuit $U(\theta)$.</p>
 <p>not parametrized</p>
 <div class="highlight"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">Ry</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Nested-example:-Quantum-function-$L$-defines-gate-parameter-of-other-quantum-function-$F$">Nested example: Quantum function $L$ defines gate parameter of other quantum function $F$<a class="anchor-link" href="#Nested-example:-Quantum-function-$L$-defines-gate-parameter-of-other-quantum-function-$F$">&#182;</a></h4><p><img src="example_2.png" width=1000/></p>
+<p><a href="https://github.com/kottmanj/talks_and_material/tree/main/qai2022/code/example_nested_objective.py">source code</a></p>
 
 </div>
 </div>
@@ -13422,8 +13441,10 @@ otherwise:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Measurement-Optimization">Measurement Optimization<a class="anchor-link" href="#Measurement-Optimization">&#182;</a></h2><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">)</span> <span class="c1"># full simulation is faster</span>
-<span class="n">E</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">,</span> <span class="n">optimize_measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># faster sampling</span>
+<h2 id="Measurement-Optimization">Measurement Optimization<a class="anchor-link" href="#Measurement-Optimization">&#182;</a></h2><div class="highlight"><pre><span></span><span class="c1"># full simulation is faster wihtout measurement optimization</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">)</span>
+<span class="c1"># sampled runs are faster with measurement optimization</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">tq</span><span class="o">.</span><span class="n">ExpectationValue</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">,</span> <span class="n">optimize_measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 <p>See papers by <a href="https://scholar.google.com/citations?user=RvQGQQQAAAAJ&amp;hl=en&amp;oi=ao">Izmaylov</a> group (T.C. Yen, V. Verteletskyi, Z.P. Bansingh)<br>
 and the tequila <a href="https://nbviewer.org/github/tequilahub/tequila-tutorials/blob/main/MeasurementGroups.ipynb">tutorial</a></p>
@@ -13484,6 +13505,7 @@ implemented as a <a href="https://qosf.org">qosf</a> project (Gaurav Saxena)</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="More:">More:<a class="anchor-link" href="#More:">&#182;</a></h2><ul>
+<li>release paper: <a href="https://arxiv.org/abs/2011.03057">arxiv:2011.03057</a></li>
 <li>tequila on github: <a href="https://github.com/tequilahub/tequila">github.com/tequilahub/tequila</a></li>
 <li>tutorials: <a href="https://github.com/tequilahub/tequila-tutorials">github.com/tequilahub/tequila-tutorials</a></li>
 <li>slide collection with research examples <a href="https://kottmanj.github.io/talks_and_material/">kottmanj.github.io/talks_and_material/</a></li>
